@@ -1,0 +1,20 @@
+.name {
+  flex-direction: row;
+}
+
+.item-table {
+  margin-top: 2rem;
+  border: 1px solid;
+  background-color: black;
+}
+
+.item-table-row {
+  
+}
+
+.item-table-cell {
+  border: 1px solid;
+  background-color: white;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

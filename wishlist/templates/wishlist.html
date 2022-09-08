@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Nama: </h5>
-<b>{{nama}}</b>
+<div class="name">
+  <h5>Nama: </h5>
+  <b>{{nama}}</b>
+</div>
 
-<table>
-  <tr>
-    <th>Nama Barang</th>
-    <th>Harga Barang</th>
-    <th>Deskripsi</th>
+<table class="item-table">
+  <tr class="item-table-row">
+    <th class="item-table-cell">Nama Barang</th>
+    <th class="item-table-cell">Harga Barang</th>
+    <th class="item-table-cell">Deskripsi</th>
   </tr>
   {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
   {% for barang in list_barang %}
-      <tr>
-          <th>{{barang.nama_barang}}</th>
-          <th>{{barang.harga_barang}}</th>
-          <th>{{barang.deskripsi}}</th>
-      </tr>
+    <tr class="item-table-row">
+      <th class="item-table-cell">{{barang.nama_barang}}</th>
+      <th class="item-table-cell">{{barang.harga_barang}}</th>
+      <th class="item-table-cell">{{barang.deskripsi}}</th>
+    </tr>
   {% endfor %}
 </table>
 
