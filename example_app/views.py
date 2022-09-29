@@ -1,4 +1,7 @@
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'last_login': request.COOKIES['last_login']
+    }
+    return render(request, 'index.html', context)
