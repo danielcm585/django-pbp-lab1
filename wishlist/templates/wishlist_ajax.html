@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="flex justify-center">
+  <div>
+    <table id="table" class="item-table bg-black">
+      <tr class="item-table-row">
+        <th class="item-table-cell">Nama Barang</th>
+        <th class="item-table-cell">Harga Barang</th>
+        <th class="item-table-cell">Deskripsi</th>
+      </tr>
+    </table>
+    <h5 class="mt-2">Nama: {{nama}}</h5>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+  </div>
+</div>
+<div class="mt-10 w-full flex justify-center">
+  <form id="form">
+    {% csrf_token %}
+    <div>
+      <input id="nama-barang-input" type="text" name="nama_barang" placeholder="Nama Barang">
+      <input id="harga-barang-input" type="number" name="harga_barang" placeholder="Harga Barang">
+      <input id="deskripsi-input" type="text" name="deskripsi" placeholder="Deskripsi">
+      <button id="create-button" type="submit" class="px-4 py-2 bg-black text-white">
+        Save
+      </button>
+    </div>
+  </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'wishlist_ajax.js' %}"></script>
+
+{% endblock content %}

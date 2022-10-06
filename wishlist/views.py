@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.urls import reverse
 from django.contrib import messages
@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from wishlist.models import BarangWishlist
+from wishlist.forms import WishlistForm
 
 @login_required(login_url='/wishlist/login')
 def show_wishlist(request):
@@ -15,9 +16,33 @@ def show_wishlist(request):
     context = {
         'list_barang': data_barang_wishlist,
         'nama': 'Daniel Christian Mandolang',
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login'),
     }
     return render(request, "wishlist.html", context)
+
+@login_required(login_url='/wishlist/login')
+def show_wishlist_ajax(request):
+    context = {
+        'nama': 'Daniel Christian Mandolang',
+        'last_login': request.COOKIES.get('last_login'),
+    }
+    return render(request, "wishlist_ajax.html", context)
+
+@login_required(login_url='/wishlist/login')
+def submit_ajax(request):
+    if (request.method == 'POST'):
+        form = WishlistForm(request.POST or None)
+        if (form.is_valid()):
+            nama_barang = form.cleaned_data['nama_barang']
+            harga_barang = form.cleaned_data['harga_barang']
+            deskripsi = form.cleaned_data['deskripsi']
+            new_wishlist = BarangWishlist.objects.create(nama_barang=nama_barang, harga_barang=harga_barang, deskripsi=deskripsi)
+            # return HttpResponse(serializers.serialize('json',[new_wishlist]), content_type='application/json')
+            return JsonResponse({
+                'nama_barang': nama_barang,
+                'harga_barang': harga_barang,
+                'deskripsi': deskripsi
+            })
 
 @login_required(login_url='/wishlist/login')
 def get_all_xml(request):

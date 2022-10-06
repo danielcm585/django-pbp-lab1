@@ -5,6 +5,8 @@ app_name = 'wishlist'
 
 urlpatterns = [
     path('', show_wishlist, name='show_wishlist'),
+    path('ajax/', show_wishlist_ajax, name='show_wishlist_ajax'),
+    path('ajax/submit', submit_ajax, name='submit_ajax'),
     path('xml/', get_all_xml, name='get_all_xml'),
     path('json/', get_all_json, name='get_all_json'),
     path('xml/<int:id>', get_one_xml, name='get_one_xml'),
